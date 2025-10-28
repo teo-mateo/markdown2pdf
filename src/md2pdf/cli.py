@@ -11,14 +11,15 @@ from . import __version__
 from .converter import MarkdownToPdfConverter
 
 
-@click.command()
+@click.command(context_settings=dict(help_option_names=['-h', '--help']))
 @click.argument('input_file', type=click.Path(exists=True), required=False)
 @click.option(
     '-o', '--output',
     type=click.Path(),
     help='Output PDF file path (default: same name as input with .pdf extension)'
 )
-@click.version_option('-v', '--version', version=__version__, prog_name='md2pdf', message='%(prog)s version %(version)s')
+@click.option('-v', '--version', is_flag=True, expose_value=False, is_eager=True, help='Show version and exit',
+              callback=lambda ctx, param, value: (click.echo(f'md2pdf version {__version__}'), ctx.exit()) if value else None)
 def main(input_file, output):
     """
     Convert Markdown documents to classy PDF files.
