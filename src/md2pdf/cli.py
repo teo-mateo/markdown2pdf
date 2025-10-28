@@ -18,7 +18,7 @@ from .converter import MarkdownToPdfConverter
     type=click.Path(),
     help='Output PDF file path (default: same name as input with .pdf extension)'
 )
-@click.version_option(version=__version__, prog_name='md2pdf', message='%(prog)s version %(version)s')
+@click.version_option('-v', '--version', version=__version__, prog_name='md2pdf', message='%(prog)s version %(version)s')
 def main(input_file, output):
     """
     Convert Markdown documents to classy PDF files.
