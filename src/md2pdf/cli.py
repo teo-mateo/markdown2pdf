@@ -18,13 +18,8 @@ from .converter import MarkdownToPdfConverter
     type=click.Path(),
     help='Output PDF file path (default: same name as input with .pdf extension)'
 )
-@click.option(
-    '-v', '--version',
-    is_flag=True,
-    help='Show version and exit'
-)
-@click.version_option(version=__version__, prog_name='md2pdf')
-def main(input_file, output, version):
+@click.version_option(version=__version__, prog_name='md2pdf', message='%(prog)s version %(version)s')
+def main(input_file, output):
     """
     Convert Markdown documents to classy PDF files.
 
@@ -34,10 +29,6 @@ def main(input_file, output, version):
       md2pdf --help
       md2pdf --version
     """
-    if version:
-        click.echo(f'md2pdf version {__version__}')
-        return
-
     if not input_file:
         click.echo('Error: Missing argument INPUT_FILE.')
         click.echo('Try "md2pdf --help" for help.')
